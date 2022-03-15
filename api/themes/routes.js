@@ -17,6 +17,14 @@ themeRouter.post("/", async (req, res) => {
 	res.send(theme)
 })
 
+//update a theme
+themeRouter.post("/:id", async (req, res) => {  
+    const id = parseInt(req.params.id); 
+   const response = await themesModel.findOneAndUpdate({site_id : id}, {$set: {'colours.primary': '#fe2343'}})
+   
+    res.send(response)
+    })
+
 themeRouter.get('/:id', async (req, res) => {
     const id = parseInt(req.params.id)
     const response = await themesModel.find({site_id : id  })
