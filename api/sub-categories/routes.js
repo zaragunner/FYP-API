@@ -21,12 +21,12 @@ subCategoryRouter.get('/', async (req, res) => {
 //     console.log("Getting product")
 // }); 
 
-// //DELETE A SINGLE PRODUCT
-// subCategoryRouter.delete('/:id', async (req, res) => {
-//     const id = parseInt(req.params.id)
-//     const response = await productsModel.deleteOne({site_id : siteID,product_id : id  })
-//     res.send(response)
-// }); 
+//DELETE A SINGLE PRODUCT
+subCategoryRouter.delete('/:id', async (req, res) => {
+    const id = parseInt(req.params.id)
+    const response = await subCategoryModel.deleteOne({site_id : siteID, sub_category_id : id  })
+    res.send(response)
+}); 
 
 // //DELETE A SINGLE PRODUCT
 // subCategoryRouter.delete('/:id', async (req, res) => {

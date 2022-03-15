@@ -28,12 +28,13 @@ categoryRouter.get('/', async (req, res) => {
 //     res.send(response)
 // }); 
 
-// //DELETE A SINGLE PRODUCT
-// categoryRouter.delete('/:id', async (req, res) => {
-//     const id = parseInt(req.params.id)
-//     const response = await productsModel.deleteOne({site_id : siteID,product_id : id  })
-//     res.send(response)
-// }); 
+//DELETE A SINGLE PRODUCT
+categoryRouter.delete('/:id', async (req, res) => {
+    const id = parseInt(req.params.id)
+    const response = await categoryModel.deleteOne({site_id : siteID, category_id : id  })
+    res.send(response)
+}); 
+
 
 //ADD A NEW PRODUCT
 categoryRouter.post("/", async (req, res) => {
