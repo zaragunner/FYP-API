@@ -38,6 +38,7 @@ categoryRouter.delete('/:id', async (req, res) => {
 
 //ADD A NEW PRODUCT
 categoryRouter.post("/", async (req, res) => {
+    try{
 	const category = new categoryModel({
 		site_id: req.body.site_id,
         name: req.body.name,
@@ -47,6 +48,12 @@ categoryRouter.post("/", async (req, res) => {
     })
 	await category.save()
 	res.send(category)
+}
+catch(e)
+{
+  res.status(400).json({error: {message: e.message}})
+
+}
 })
 
 

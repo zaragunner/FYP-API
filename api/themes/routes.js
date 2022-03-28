@@ -7,6 +7,7 @@ const themeRouter = express.Router();
 
 //ADD A NEW SITE
 themeRouter.post("/", async (req, res) => {
+    try{
 	const theme = new themesModel({
 		site_id: req.body.site_id,
         colours: req.body.colours,
@@ -15,6 +16,12 @@ themeRouter.post("/", async (req, res) => {
     })
 	await theme.save()
 	res.send(theme)
+}
+catch(e)
+{
+  res.status(400).json({error: {message: e.message}})
+
+}
 })
 
 //update a theme

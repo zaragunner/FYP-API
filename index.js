@@ -7,6 +7,7 @@ import subCategoryRouter from './api/sub-categories/routes.js'
 import vatRouter from './api/vat/routes.js'
 import sitesRouter from './api/sites/routes.js'
 import themeRouter from './api/themes/routes.js';
+import stripeRouter from './api/stripe/routes.js'
 dotenv.config();
 
 
@@ -24,6 +25,7 @@ app.use('/api/subcategories', subCategoryRouter);
 app.use('/api/vat', vatRouter);
 app.use('/api/sites' , sitesRouter);
 app.use('/api/themes', themeRouter);
+app.use('/api/stripe', stripeRouter)
 app.listen(port, () => {
   console.info(`Server running at ${port}`);
 });

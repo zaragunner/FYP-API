@@ -37,6 +37,7 @@ subCategoryRouter.delete('/:id', async (req, res) => {
 
 //ADD A NEW PRODUCT
 subCategoryRouter.post("/", async (req, res) => {
+    try{
 	const subCategory = new subCategoryModel({
 		site_id: req.body.site_id,
         name: req.body.name,
@@ -46,6 +47,12 @@ subCategoryRouter.post("/", async (req, res) => {
     })
 	await subCategory.save()
 	res.send(subCategory)
+}
+catch(e)
+{
+  res.status(400).json({error: {message: e.message}})
+
+}
 })
 
 

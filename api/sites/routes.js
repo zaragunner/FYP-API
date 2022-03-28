@@ -7,6 +7,7 @@ const sitesRouter = express.Router();
 
 //ADD A NEW SITE
 sitesRouter.post("/", async (req, res) => {
+    try{
 	const site = new sitesModel({
 		site_id: req.body.site_id,
         name: req.body.name,
@@ -20,12 +21,25 @@ sitesRouter.post("/", async (req, res) => {
     })
 	await site.save()
 	res.send(site)
+}
+catch(e)
+{
+  res.status(400).json({error: {message: e.message}})
+
+}
 })
 
 sitesRouter.get('/:id', async (req, res) => {
+    try{
     const id = parseInt(req.params.id)
     const response = await sitesModel.find({site_id : id  })
     res.send(response[0])
+    }
+    catch(e)
+    {
+      res.status(400).json({error: {message: e.message}})
+  
+    }
 }); 
 
 
