@@ -8,24 +8,27 @@ import vatRouter from './api/vat/routes.js'
 import sitesRouter from './api/sites/routes.js'
 import themeRouter from './api/themes/routes.js';
 import stripeRouter from './api/stripe/routes.js'
+import awsRouter from './api/aws/routes.js'
+import ordersRouter from './api/orders/routes.js'
 dotenv.config();
-
-
 
 
 mongoose.connect(process.env.mongoDB)
 .then(()=> {
   const app = express();
-  
+ 
 const port = process.env.PORT;
 app.use(express.json());
+app.use(express.static('./api/products/uploads'))
 app.use('/api/products', productsRouter);
 app.use('/api/categories', categoryRouter);
 app.use('/api/subcategories', subCategoryRouter);
 app.use('/api/vat', vatRouter);
 app.use('/api/sites' , sitesRouter);
 app.use('/api/themes', themeRouter);
-app.use('/api/stripe', stripeRouter)
+app.use('/api/stripe', stripeRouter);
+app.use('/api/aws', awsRouter);
+app.use('/api/orders' , ordersRouter)
 app.listen(port, () => {
   console.info(`Server running at ${port}`);
 });
@@ -45,3 +48,5 @@ db.once('open', () => {
   console.log(`database connected to ${db.name} on ${db.host}`);
 })
 
+
+export default db;
