@@ -13,13 +13,7 @@ subCategoryRouter.get('/', async (req, res) => {
     res.send(subCategories)
 });
 
-// //GET PRODUCT BY ID
-// subCategoryRouter.get('/:id',  async (req, res) => {
-//     const id = parseInt(req.params.id)
-//     const product = await productsModel.findOne({site_id : siteID, product_id : id})
-//     res.send(product)
-//     console.log("Getting product")
-// }); 
+
 
 //DELETE A SINGLE PRODUCT
 subCategoryRouter.delete('/:id', async (req, res) => {
@@ -28,12 +22,7 @@ subCategoryRouter.delete('/:id', async (req, res) => {
     res.send(response)
 }); 
 
-// //DELETE A SINGLE PRODUCT
-// subCategoryRouter.delete('/:id', async (req, res) => {
-//     const id = parseInt(req.params.id)
-//     const response = await productsModel.deleteOne({site_id : siteID,product_id : id  })
-//     res.send(response)
-// }); 
+
 
 //ADD A NEW PRODUCT
 subCategoryRouter.post("/", async (req, res) => {
@@ -53,7 +42,26 @@ catch(e)
   res.status(400).json({error: {message: e.message}})
 
 }
-})
+});
+
+
+  subCategoryRouter.put('/:id', async (req, res) => {
+    try{
+    
+    const id = req.params.id;
+    const filter = {sub_category_id : id };
+  // `doc` is the document _before_ `update` was applied
+    const response = await subCategoryModel.findOneAndUpdate(filter,
+      {"$set": { "name": req.body.name, "description" : req.body.description } } , {
+        new: true
+      });
+      res.status(200).json(response)
+    }
+    catch(e){
+       
+      console.log(e)
+    }
+  });
 
 
 export default subCategoryRouter;

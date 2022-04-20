@@ -13,28 +13,6 @@ vatRouter.get('/', async (req, res) => {
     res.send(vatCategories)
 });
 
-// //GET PRODUCT BY ID
-// vatRouter.get('/:id',  async (req, res) => {
-//     const id = parseInt(req.params.id)
-//     const product = await productsModel.findOne({site_id : siteID, product_id : id})
-//     res.send(product)
-//     console.log("Getting product")
-// }); 
-
-// //DELETE A SINGLE PRODUCT
-// vatRouter.delete('/:id', async (req, res) => {
-//     const id = parseInt(req.params.id)
-//     const response = await productsModel.deleteOne({site_id : siteID,product_id : id  })
-//     res.send(response)
-// }); 
-
-// //DELETE A SINGLE PRODUCT
-// vatRouter.delete('/:id', async (req, res) => {
-//     const id = parseInt(req.params.id)
-//     const response = await productsModel.deleteOne({site_id : siteID,product_id : id  })
-//     res.send(response)
-// }); 
-
 //ADD A NEW PRODUCT
 vatRouter.post("/", async (req, res) => {
     try{
@@ -54,6 +32,25 @@ catch(e)
 
 }
 })
+
+vatRouter.put('/:id', async (req, res) => {
+    try{
+      console.log("updating vat Rate")
+    const id = req.params.id;
+    const filter = {vat_id : id };
+  console.log(id, req.body.name, req.body.rate)
+  // `doc` is the document _before_ `update` was applied
+    const response = await vatModel.findOneAndUpdate(filter,
+      {"$set": { "name": req.body.name, "rate" : req.body.rate } } , {
+        new: true
+      });
+      
+      res.status(200).json(response)
+    }
+    catch(e){
+      console.log(e)
+    }
+  })
 
 
 export default vatRouter;

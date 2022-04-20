@@ -61,6 +61,29 @@ productsRouter.delete('/:id', async (req, res) => {
     }
 }); 
 
+productsRouter.put('/:id',upload.single('thumbnail'), async (req, res) => {
+  try{
+  const id = req.params.id;
+  const filter = { product_id : id };
+
+// `doc` is the document _before_ `update` was applied
+  const response = await productsModel.findOneAndUpdate(filter,
+    {"$set": { "name": req.body.name, 
+              "description": req.body.description,
+              "category_id": req.body.category_id,
+              "sub_category_id": req.body.category_id,
+              "netprice": req.body.netprice,
+              "vat_id": req.body.vat_id,
+              "images" : req.body.images,
+              "options" : req.body.options}}, {
+    new: true
+  });
+  res.send(response)
+}
+catch(e){
+  console.log(e)
+}
+}); 
 //DELETE A SINGLE PRODUCT
 productsRouter.delete('/:id', async (req, res) => {
     try{
@@ -77,6 +100,7 @@ productsRouter.delete('/:id', async (req, res) => {
 
 //ADD A NEW PRODUCT
 productsRouter.post("/", upload.single('thumbnail'), async (req, res) => {
+  console.log(req.body.options)
     try{
 	const products = new productsModel({
 		product_id: req.body.product_id,

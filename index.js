@@ -10,6 +10,7 @@ import themeRouter from './api/themes/routes.js';
 import stripeRouter from './api/stripe/routes.js'
 import awsRouter from './api/aws/routes.js'
 import ordersRouter from './api/orders/routes.js'
+import optionsRouter from './api/options/routes.js'
 dotenv.config();
 
 
@@ -28,7 +29,8 @@ app.use('/api/sites' , sitesRouter);
 app.use('/api/themes', themeRouter);
 app.use('/api/stripe', stripeRouter);
 app.use('/api/aws', awsRouter);
-app.use('/api/orders' , ordersRouter)
+app.use('/api/orders' , ordersRouter);
+app.use('/api/options', optionsRouter);
 app.listen(port, () => {
   console.info(`Server running at ${port}`);
 });

@@ -37,6 +37,24 @@ catch(e)
 }
 });
 
+categoryRouter.put('/:id', async (req, res) => {
+  try{
+    console.log("updating category")
+  const id = req.params.id;
+  const filter = {category_id : id };
+console.log(id, req.body.name, req.body.description)
+// `doc` is the document _before_ `update` was applied
+  const response = await categoryModel.findOneAndUpdate(filter,
+    {"$set": { "name": req.body.name, "description" : req.body.description } } , {
+      new: true
+    });
+    
+    res.status(200).json(response)
+  }
+  catch(e){
+    console.log(e)
+  }
+})
 
 
 
