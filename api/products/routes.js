@@ -9,7 +9,7 @@ import fs from 'fs'
 
 const fileStorageEngine = multer.diskStorage({
   destination : (req, file, cb)=>{
-    cb(null, '../API/api/products/uploads/' )
+    cb(null, '/' )
   },
   filename : (req, file, cb) =>{
     cb(null, file.originalname)
