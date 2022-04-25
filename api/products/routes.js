@@ -50,7 +50,7 @@ productsRouter.get('/:id',  async (req, res) => {
 productsRouter.delete('/:id', async (req, res) => {
     try{
     const id = req.params.id;
-    const response = await productsModel.deleteOne({site_id : req.query.site ,product_id : id  })
+    const response = await productsModel.deleteOne({product_id : id  })
     res.send(response)
     }
     catch(e)
