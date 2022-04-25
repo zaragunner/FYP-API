@@ -15,14 +15,15 @@ dotenv.config();
 
 import cors from 'cors'
 
-app.use(cors({
-    origin: 'https://fyp-client-44.herokuapp.com/'
-}));
+
 
 
 mongoose.connect(process.env.mongoDB)
 .then(()=> {
   const app = express();
+  app.use(cors({
+    origin: 'https://fyp-client-44.herokuapp.com/'
+}));
  
 const port = process.env.PORT;
 app.use(express.json());
