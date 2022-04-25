@@ -14,7 +14,7 @@ import optionsRouter from './api/options/routes.js'
 dotenv.config();
 
 import cors from 'cors'
-const cors = require('cors');
+
 app.use(cors({
     origin: 'https://fyp-client-44.herokuapp.com/'
 }));
