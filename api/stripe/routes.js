@@ -55,7 +55,7 @@ stripeRouter.post('/confirm-payment', async (req, res) => {
     {payment_method: req.body.payment_method.paymentMethod.id}
   );
   db.collection('confirmedPayments').insertOne({
-    site_id : process.env.siteID , 
+    site_id : req.query.site , 
     order_id: req.body.order_id,
     paymentIntent , 
     order : req.body.order , 
