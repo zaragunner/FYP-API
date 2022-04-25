@@ -13,6 +13,12 @@ import ordersRouter from './api/orders/routes.js'
 import optionsRouter from './api/options/routes.js'
 dotenv.config();
 
+import cors from 'cors'
+const cors = require('cors');
+app.use(cors({
+    origin: 'https://fyp-client-44.herokuapp.com/'
+}));
+
 
 mongoose.connect(process.env.mongoDB)
 .then(()=> {
@@ -21,7 +27,7 @@ mongoose.connect(process.env.mongoDB)
 const port = process.env.PORT;
 app.use(express.json());
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('Fourth Year Project Express API')
 })
 app.use(express.static('./api/products/uploads'))
 app.use('/api/products', productsRouter);
