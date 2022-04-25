@@ -5,11 +5,11 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const vatRouter = express.Router(); 
-const siteID = process.env.siteID
+
 
 //GET ALL PRODUCTS
 vatRouter.get('/', async (req, res) => {
-    const vatCategories = await vatModel.find({site_id : siteID})
+    const vatCategories = await vatModel.find({site_id : req.query.site})
     res.send(vatCategories)
 });
 

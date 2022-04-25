@@ -17,12 +17,11 @@ const fileStorageEngine = multer.diskStorage({
 })
 const upload = multer({storage: fileStorageEngine});
 const productsRouter = express.Router(); 
-const siteID = process.env.siteID
 
 //GET ALL PRODUCTS
 productsRouter.get('/', async (req, res) => {
     try{
-    const products = await productsModel.find({site_id : siteID})
+    const products = await productsModel.find({site_id :req.query.site})
     res.send(products)
     }
     catch(e)
@@ -36,7 +35,7 @@ productsRouter.get('/', async (req, res) => {
 productsRouter.get('/:id',  async (req, res) => {
     try{
     const id = req.params.id
-    const product = await productsModel.findOne({site_id : siteID, product_id : id})
+    const product = await productsModel.findOne({site_id : req.query.site, product_id : id})
     res.send(product)
     console.log("Getting product")
     }
@@ -51,7 +50,7 @@ productsRouter.get('/:id',  async (req, res) => {
 productsRouter.delete('/:id', async (req, res) => {
     try{
     const id = req.params.id;
-    const response = await productsModel.deleteOne({site_id : siteID,product_id : id  })
+    const response = await productsModel.deleteOne({site_id : req.query.site ,product_id : id  })
     res.send(response)
     }
     catch(e)
@@ -83,19 +82,6 @@ productsRouter.put('/:id',upload.single('thumbnail'), async (req, res) => {
 catch(e){
   console.log(e)
 }
-}); 
-//DELETE A SINGLE PRODUCT
-productsRouter.delete('/:id', async (req, res) => {
-    try{
-    const id = parseInt(req.params.id)
-    const response = await productsModel.deleteOne({site_id : siteID,product_id : id  })
-    res.send(response)
-    }
-    catch(e)
-    {
-      res.status(400).json({error: {message: e.message}})
-  
-    }
 }); 
 
 //ADD A NEW PRODUCT

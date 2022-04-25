@@ -4,7 +4,7 @@ import categoryModel from './categoryModel.js';
 import dotenv from 'dotenv';
 dotenv.config();
 const categoryRouter = express.Router(); 
-const siteID = process.env.siteID
+
 
 //ADD A NEW CAtegory
 categoryRouter.post("/", async (req, res) => {

@@ -5,11 +5,11 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const subCategoryRouter = express.Router(); 
-const siteID = process.env.siteID
+
 
 //GET ALL PRODUCTS
 subCategoryRouter.get('/', async (req, res) => {
-    const subCategories = await subCategoryModel.find({site_id : siteID})
+    const subCategories = await subCategoryModel.find({site_id : req.query.site})
     res.send(subCategories)
 });
 
@@ -18,7 +18,7 @@ subCategoryRouter.get('/', async (req, res) => {
 //DELETE A SINGLE PRODUCT
 subCategoryRouter.delete('/:id', async (req, res) => {
     const id = req.params.id;
-    const response = await subCategoryModel.deleteOne({site_id : siteID, sub_category_id : id  })
+    const response = await subCategoryModel.deleteOne({site_id : req.query.site, sub_category_id : id  })
     res.send(response)
 }); 
 

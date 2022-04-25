@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const optionsRouter = express.Router(); 
-const siteID = process.env.siteID
+
 //ADD A NEW option
 optionsRouter.post("/", async (req, res) => {
   try{
@@ -30,10 +30,10 @@ optionsRouter.get('/:id',  async (req, res) => {
 }); 
 
 
-//GET ALL Categories
+//GET ALL options
 optionsRouter.get('/', async (req, res) => {
     try{
-    const options = await optionModel.find({site_id : siteID})
+    const options = await optionModel.find({site_id : req.query.site})
     res.send(options)
 }
 catch(e)
@@ -65,7 +65,7 @@ console.log(id, req.body.name, req.body.description)
 optionsRouter.delete('/:id', async (req, res) => {
   try{
   const id = req.params.id
-  const response = await optionModel.deleteOne({site_id : siteID, option_id : id  })
+  const response = await optionModel.deleteOne({option_id : id  })
   res.send(response)
   }
   catch(e)
