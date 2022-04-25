@@ -20,6 +20,9 @@ mongoose.connect(process.env.mongoDB)
  
 const port = process.env.PORT;
 app.use(express.json());
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
 app.use(express.static('./api/products/uploads'))
 app.use('/api/products', productsRouter);
 app.use('/api/categories', categoryRouter);
