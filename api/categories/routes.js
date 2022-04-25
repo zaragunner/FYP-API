@@ -28,7 +28,7 @@ res.status(400).json({error: {message: e.message}})
 //GET ALL Categories
 categoryRouter.get('/', async (req, res) => {
     try{
-    const categories = await categoryModel.find({site_id : siteID})
+    const categories = await categoryModel.find({site_id : req.body.site_id})
     res.send(categories)
 }
 catch(e)
@@ -72,7 +72,7 @@ console.log(id, req.body.name, req.body.description)
 categoryRouter.delete('/:id', async (req, res) => {
     try{
     const id = req.params.id
-    const response = await categoryModel.deleteOne({site_id : siteID, category_id : id  })
+    const response = await categoryModel.deleteOne({site_id : req.body.site_id, category_id : id  })
     res.send(response)
     }
     catch(e)
