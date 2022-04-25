@@ -28,6 +28,7 @@ res.status(400).json({error: {message: e.message}})
 //GET ALL Categories
 categoryRouter.get('/', async (req, res) => {
     try{
+      console.log("REQUESTS" , req)
     const categories = await categoryModel.find({site_id : req.query.site_id})
     res.send(categories)
 }
