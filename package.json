@@ -4,7 +4,8 @@
   "description": "Api for FYP",
   "main": "index.js",
   "engines": {
-    "node": "16.x"
+    "node": "16.x",
+    "yarn": "0.27.5"
   },
   "scripts": {
     "start": "nodemon --exec babel-node index.js"
