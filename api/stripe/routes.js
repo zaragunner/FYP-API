@@ -54,9 +54,14 @@ stripeRouter.post('/confirm-payment', async (req, res) => {
    req.body.payment_intent,
     {payment_method: req.body.payment_method.paymentMethod.id}
   );
-  db.collection('confirmedPayments').insertOne({site_id : process.env.siteID , paymentIntent , order : req.body.order , customer: req.body.customer, status: 'Processing' }),
+  db.collection('confirmedPayments').insertOne({
+    site_id : process.env.siteID , 
+    order_id: req.body.order_id,
+    paymentIntent , 
+    order : req.body.order , 
+    customer: req.body.customer, 
+    status: 'Processing' }),
   res.json({status:200, paymentIntent})
-  
   }
   catch(e)
   {

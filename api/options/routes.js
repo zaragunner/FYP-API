@@ -5,7 +5,7 @@ dotenv.config();
 
 const optionsRouter = express.Router(); 
 const siteID = process.env.siteID
-//ADD A NEW CAtegory
+//ADD A NEW option
 optionsRouter.post("/", async (req, res) => {
   try{
 const option = new optionModel({
@@ -42,5 +42,37 @@ catch(e)
 
 }
 });
+
+optionsRouter.put('/:id', async (req, res) => {
+  try{
+    console.log("updating options")
+  const id = req.params.id;
+  const filter = {option_id : id };
+console.log(id, req.body.name, req.body.description)
+// `doc` is the document _before_ `update` was applied
+  const response = await optionModel.findOneAndUpdate(filter,
+    {"$set": { "name": req.body.name } } , {
+      new: true
+    });
+    
+    res.status(200).json(response)
+  }
+  catch(e){
+    console.log(e)
+  }
+})
+
+optionsRouter.delete('/:id', async (req, res) => {
+  try{
+  const id = req.params.id
+  const response = await optionModel.deleteOne({site_id : siteID, option_id : id  })
+  res.send(response)
+  }
+  catch(e)
+{
+res.status(400).json({error: {message: e.message}})
+
+}
+}); 
 
 export default optionsRouter;

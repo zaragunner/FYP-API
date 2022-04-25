@@ -78,7 +78,7 @@ productsRouter.put('/:id',upload.single('thumbnail'), async (req, res) => {
               "options" : req.body.options}}, {
     new: true
   });
-  res.send(response)
+  res.status(200).json(response)
 }
 catch(e){
   console.log(e)
