@@ -71,6 +71,7 @@ console.log(id, req.body.name, req.body.description)
 
 //DELETE A SINGLE Category
 categoryRouter.delete('/:id', async (req, res) => {
+  const id = req.params.id
     try{
     const response = await categoryModel.deleteOne({category_id : id  })
     res.send(response)
