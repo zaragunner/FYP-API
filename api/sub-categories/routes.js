@@ -18,7 +18,7 @@ subCategoryRouter.get('/', async (req, res) => {
 //DELETE A SINGLE PRODUCT
 subCategoryRouter.delete('/:id', async (req, res) => {
     const id = req.params.id;
-    const response = await subCategoryModel.deleteOne({site_id : req.query.site, sub_category_id : id  })
+    const response = await subCategoryModel.deleteOne({ sub_category_id : id  })
     res.send(response)
 }); 
 
