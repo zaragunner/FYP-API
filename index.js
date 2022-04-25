@@ -37,7 +37,7 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Credentials', true);
   return next();
 });
- 
+app.options('*', cors())
 const port = process.env.PORT;
 app.use(express.json());
 app.get('/', (req, res) => {
