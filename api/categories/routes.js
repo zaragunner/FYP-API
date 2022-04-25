@@ -29,7 +29,7 @@ res.status(400).json({error: {message: e.message}})
 categoryRouter.get('/', async (req, res) => {
     try{
       console.log("REQUESTS" , req.query)
-    const categories = await categoryModel.find({site_id : req.query.site_id})
+    const categories = await categoryModel.find({site_id : req.query.site})
     res.send(categories)
 }
 catch(e)
